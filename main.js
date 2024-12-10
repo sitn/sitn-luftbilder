@@ -14,10 +14,18 @@ const params = new URLSearchParams(document.location.search);
 const url = params.get('url');
 const east = parseFloat(params.get('east'));
 const north = parseFloat(params.get('north'));
+const img_type = params.get('type');
+
+const img_type_tag = document.getElementById('image_type');
+(img_type === 'ortho') ? img_type_tag.innerText = "Type d'image: Orthophoto" : img_type_tag.innerText = "Type d'image: Image aérienne";
 
 const img = url.split('/').slice(-1);
 const h5 = document.getElementById('image_id');
-h5.innerText = "Image: " + img;
+const aTag = document.createElement("a");
+aTag.href = url;
+aTag.innerHTML = img;
+aTag.setAttribute('target', '_blank');
+h5.appendChild(aTag);
 
 const extent = [2420000, 1030000, 2900000, 1360000];
 const crs = "EPSG:2056";
